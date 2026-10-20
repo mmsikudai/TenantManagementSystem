@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">TenantManagementSystem</string>
+
+    <string name="add_tenant_title">ADD TENANT</string>
+    <string name="tenant_name_hint">Tenant name</string>
+    <string name="phone_number_hint">Phone number</string>
+    <string name="monthly_rent_hint">Monthly rent</string>
+    <string name="save_tenant">Save Tenant</string>
+
 </resources>

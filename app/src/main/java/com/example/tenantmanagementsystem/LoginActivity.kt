@@ -1,6 +1,7 @@
 package com.example.tenantmanagementsystem
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -11,21 +12,35 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        binding.helpTextView.setOnClickListener {
-            val intent = Intent(
-                Intent.ACTION_VIEW,
-                android.net.Uri.parse("https://www.strathmore.edu/")
-            )
-            startActivity(intent)
-        }
         super.onCreate(savedInstanceState)
 
+        // Initialize binding before accessing any views
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Fill in the email if it was passed from RegisterActivity
         val registeredEmail = intent.getStringExtra("email")
+
         if (registeredEmail != null) {
             binding.emailEditText.setText(registeredEmail)
         }
+
+        // Open the Strathmore University website
+        binding.helpTextView.setOnClickListener {
+            val intent = Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse("https://www.strathmore.edu/")
+            )
+            startActivity(intent)
+        }
+
+        // Open the registration screen
+        binding.registerTextView.setOnClickListener {
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+        }
+
+        // Handle login
         binding.loginButton.setOnClickListener {
             val email = binding.emailEditText.text.toString().trim()
             val password = binding.passwordEditText.text.toString()
@@ -36,13 +51,11 @@ class LoginActivity : AppCompatActivity() {
                     "Please enter your email and password",
                     Toast.LENGTH_SHORT
                 ).show()
+
                 return@setOnClickListener
             }
 
-            binding.registerTextView.setOnClickListener {
-                val intent = Intent(this, RegisterActivity::class.java)
-                startActivity(intent)
-            }
+            // Open the main tenant management screen
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
