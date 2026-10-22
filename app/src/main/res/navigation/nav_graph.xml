@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
@@ -12,7 +13,13 @@
 
         <action
             android:id="@+id/action_dashboardFragment_to_addTenantFragment"
-            app:destination="@id/addTenantFragment" />
+            app:destination="@id/addTenantFragment"
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="false"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
 
         <action
             android:id="@+id/action_dashboardFragment_to_viewTenantsFragment"
@@ -45,5 +52,11 @@
             android:defaultValue="@null" />
 
     </fragment>
+
+    <!-- About Fragment -->
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.example.tenantmanagementsystem.AboutFragment"
+        android:label="About" />
 
 </navigation>

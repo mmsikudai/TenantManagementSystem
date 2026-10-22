@@ -14,18 +14,15 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Initialize binding before accessing any views
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Fill in the email if it was passed from RegisterActivity
         val registeredEmail = intent.getStringExtra("email")
 
         if (registeredEmail != null) {
             binding.emailEditText.setText(registeredEmail)
         }
 
-        // Open the Strathmore University website
         binding.helpTextView.setOnClickListener {
             val intent = Intent(
                 Intent.ACTION_VIEW,
@@ -34,13 +31,11 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // Open the registration screen
         binding.registerTextView.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
 
-        // Handle login
         binding.loginButton.setOnClickListener {
             val email = binding.emailEditText.text.toString().trim()
             val password = binding.passwordEditText.text.toString()
@@ -57,6 +52,7 @@ class LoginActivity : AppCompatActivity() {
 
             // Open the main tenant management screen
             val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("EMAIL", email)
             startActivity(intent)
             finish()
         }
